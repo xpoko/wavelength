@@ -1,15 +1,15 @@
 {
   "projects": {
-    "default": "wavelength-online"
+    "default": "wavelength-xpoko"
   },
   "targets": {
-    "wavelength-online": {
+    "wavelength-xpoko": {
       "hosting": {
-        "longwave": [
-          "longwave"
+        "wavelength-xpoko": [
+          "wavelength-xpoko"
         ],
         "dev": [
-          "wavelength-online"
+          "wavelength-xpoko"
         ]
       }
     }
