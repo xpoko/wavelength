@@ -5,7 +5,8 @@ import { Spectrum } from "../common/Spectrum";
 
 import { useTranslation } from "react-i18next";
 
-export function PreviousTurnResult(props: TurnSummaryModel) {
+export function PreviousTurnResult(props: TurnSummaryModel)
+{
   const { t } = useTranslation();
   const style: React.CSSProperties = {
     borderTop: "1px solid black",
@@ -38,6 +39,7 @@ export function PreviousTurnResult(props: TurnSummaryModel) {
           spectrumCard={props.spectrumCard}
           handleValue={props.guess}
           targetValue={props.spectrumTarget}
+          settled={true}
         />
         <CenteredColumn>
           <div>

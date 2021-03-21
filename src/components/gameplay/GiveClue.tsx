@@ -10,7 +10,8 @@ import { Info } from "../common/Info";
 import { Animate } from "../common/Animate";
 import { useTranslation } from "react-i18next";
 
-export function GiveClue() {
+export function GiveClue()
+{
   const { t } = useTranslation();
   const {
     gameState,
@@ -24,19 +25,21 @@ export function GiveClue() {
     !inputElement.current?.value?.length
   );
 
-  if (!clueGiver) {
+  if (!clueGiver)
+  {
     setGameState({
       clueGiver: localPlayer.id,
     });
     return null;
   }
 
-  if (localPlayer.id !== clueGiver.id) {
+  if (localPlayer.id !== clueGiver.id)
+  {
     return (
       <div>
-        <Animate animation="wipe-reveal-right">
-          <Spectrum spectrumCard={spectrumCard} />
-        </Animate>
+        {/* <Animate animation="wipe-reveal-right"> */}
+        <Spectrum spectrumCard={spectrumCard} />
+        {/* </Animate> */}
         <CenteredColumn>
           <div>
             {t("giveclue.waiting_for_clue", { givername: clueGiver.name })}
@@ -46,8 +49,10 @@ export function GiveClue() {
     );
   }
 
-  const submit = () => {
-    if (!inputElement.current?.value?.length) {
+  const submit = () =>
+  {
+    if (!inputElement.current?.value?.length)
+    {
       return false;
     }
 
@@ -71,20 +76,22 @@ export function GiveClue() {
           <Button text={t("giveclue.draw_other_hand")} onClick={redrawCard} />
         </CenteredColumn>
       )}
-      <Animate animation="wipe-reveal-right">
-        <Spectrum
-          targetValue={gameState.spectrumTarget}
-          spectrumCard={spectrumCard}
-        />
-      </Animate>
+      {/* <Animate animation="wipe-reveal-right"> */}
+      <Spectrum
+        targetValue={gameState.spectrumTarget}
+        spectrumCard={spectrumCard}
+      />
+      {/* </Animate> */}
       <CenteredColumn>
         <CenteredRow>
           <input
             type="text"
             placeholder={t("giveclue.clue")}
             ref={inputElement}
-            onKeyDown={(event) => {
-              if (event.key !== "Enter") {
+            onKeyDown={(event) =>
+            {
+              if (event.key !== "Enter")
+              {
                 return true;
               }
               submit();
