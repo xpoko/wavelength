@@ -33,7 +33,6 @@ export function Spectrum(props: {
           </div>
         </CenteredRow>
         <Wheel
-          height={240}
           target={props.targetValue}
           hand={props.handleValue || props.guessingValue}
           settled={props.settled || false}

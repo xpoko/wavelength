@@ -10,7 +10,6 @@ import { Spring } from 'react-spring/renderprops'
 
 interface WheelProps
 {
-  height: number,
   target?: number,
   hand?: number,
   settled: boolean,
@@ -36,7 +35,9 @@ const targetMarkerStyle: React.CSSProperties = {
 
 function WheelInternal(props: WheelProps & { parent: ParentSizeProvidedProps })
 {
-  const barLength = props.height * .95;
+  const width = props.parent.width;
+  const height = width * .5;
+  const barLength = height * .95;
 
   let targetMarker = <></>
 
@@ -73,7 +74,7 @@ function WheelInternal(props: WheelProps & { parent: ParentSizeProvidedProps })
               startAngle={radian(-animated.targetRangeBig)}
               endAngle={radian(animated.targetRangeBig)}
               innerRadius={innerRadius}
-              outerRadius={props.height}
+              outerRadius={height}
               fill="#E39F03"
               style={targetMarkerStyle}
             />
@@ -81,7 +82,7 @@ function WheelInternal(props: WheelProps & { parent: ParentSizeProvidedProps })
               startAngle={radian(-animated.targetRangeMid)}
               endAngle={radian(animated.targetRangeMid)}
               innerRadius={innerRadius}
-              outerRadius={props.height}
+              outerRadius={height}
               fill="#B5E3B4"
               style={targetMarkerStyle}
             />
@@ -89,7 +90,7 @@ function WheelInternal(props: WheelProps & { parent: ParentSizeProvidedProps })
               startAngle={radian(-animated.targetRangeSmo)}
               endAngle={radian(animated.targetRangeSmo)}
               innerRadius={innerRadius}
-              outerRadius={props.height}
+              outerRadius={height}
               fill="#FE6A46"
               style={targetMarkerStyle}
             />
@@ -148,8 +149,8 @@ function WheelInternal(props: WheelProps & { parent: ParentSizeProvidedProps })
 
     if (p == null) return
 
-    const x = p.x - props.parent.width / 2
-    const y = p.y - props.height
+    const x = p.x - width / 2
+    const y = p.y - height
 
     let angle = angleBetweenVec({ x: 0, y: -1 }, { x, y })
     if (x < 0) angle = -angle
@@ -167,22 +168,22 @@ function WheelInternal(props: WheelProps & { parent: ParentSizeProvidedProps })
     startAngle={radian(-faceMax)}
     endAngle={radian(faceMax)}
     innerRadius={innerRadius}
-    outerRadius={props.height}
+    outerRadius={height}
     fill="#7FDDFF"
     cornerRadius={4}
   />
 
   return <svg
     className="wheel"
-    width={props.parent.width}
-    height={props.height + additionalHeight}
+    width={width}
+    height={height + additionalHeight}
     onPointerDown={e => { setIsDragging(true); onDrag(e) }}
     onPointerMove={onDrag}
     onPointerUp={e => setIsDragging(false)}
   >
     <Group
-      left={props.parent.width / 2}
-      top={props.height}
+      left={width / 2}
+      top={height}
     >
       <clipPath id="faceClip">{wheelFace}</clipPath>
 
