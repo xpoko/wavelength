@@ -143,6 +143,8 @@ function WheelInternal(props: WheelProps & { parent: ParentSizeProvidedProps })
 
   const onDrag = (e: React.PointerEvent) =>
   {
+    e.preventDefault();
+
     if (!IsDragging) return
 
     const p = localPoint(e);

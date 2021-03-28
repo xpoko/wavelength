@@ -28,7 +28,7 @@ export function Spectrum(props: {
 
   return (
     <div>
-      <CenteredColumn style={{ alignItems: "stretch" }}>
+      <CenteredColumn style={{ alignItems: "stretch", touchAction: 'none' }}>
         <CenteredRow style={{ justifyContent: "space-between", marginBottom: 8 }}>
           <div className='spectrum-card' style={{ backgroundColor: primary }}>
             {props.spectrumCard[0]}
