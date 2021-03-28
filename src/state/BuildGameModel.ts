@@ -14,7 +14,8 @@ type Player = {
   team: Team;
 };
 
-export interface GameModel {
+export interface GameModel
+{
   gameState: GameState;
   localPlayer: Player;
   clueGiver: Player | null;
@@ -30,12 +31,13 @@ export function BuildGameModel(
   gameState: GameState,
   setGameState: (newState: Partial<GameState>) => void,
   localPlayerId: string
-): GameModel {
+): GameModel
+{
   const clueGiver = gameState.players[gameState.clueGiver]
     ? {
-        ...gameState.players[gameState.clueGiver],
-        id: gameState.clueGiver,
-      }
+      ...gameState.players[gameState.clueGiver],
+      id: gameState.clueGiver,
+    }
     : null;
 
   const spectrumDeck = getSeededDeck(gameState.deckSeed, AllCards);

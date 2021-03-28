@@ -16,19 +16,15 @@ export function Spectrum(props: {
   const [primary, secondary] = GetContrastingColors(
     getStringHash(props.spectrumCard[0])
   );
-  const cardBackStyle: React.CSSProperties = {
-    padding: 8,
-    fontWeight: "bold",
-  };
 
   return (
     <div>
       <CenteredColumn style={{ alignItems: "stretch" }}>
-        <CenteredRow style={{ justifyContent: "space-between" }}>
-          <div style={{ ...cardBackStyle, backgroundColor: primary }}>
+        <CenteredRow style={{ justifyContent: "space-between", marginBottom: 8 }}>
+          <div className='spectrum-card' style={{ backgroundColor: primary }}>
             {props.spectrumCard[0]}
           </div>
-          <div style={{ ...cardBackStyle, backgroundColor: secondary }}>
+          <div className='spectrum-card' style={{ backgroundColor: secondary }}>
             {props.spectrumCard[1]}
           </div>
         </CenteredRow>
