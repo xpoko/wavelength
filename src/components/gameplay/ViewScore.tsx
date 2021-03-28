@@ -3,7 +3,8 @@ import { GetScore } from "../../state/GetScore";
 import { CenteredColumn, CenteredRow } from "../common/LayoutElements";
 import { Spectrum } from "../common/Spectrum";
 import { Button } from "../common/Button";
-import {
+import
+{
   GameType,
   Team,
   InitialGameState,
@@ -16,17 +17,20 @@ import { Info } from "../common/Info";
 
 import { useTranslation } from "react-i18next";
 
-export function ViewScore() {
+export function ViewScore()
+{
   const { t } = useTranslation();
   const { gameState, clueGiver, spectrumCard } = useContext(GameModelContext);
 
-  if (!clueGiver) {
+  if (!clueGiver)
+  {
     return null;
   }
 
   let score = GetScore(gameState.spectrumTarget, gameState.guess);
   let bonusCoopTurn = false;
-  if (gameState.gameType === GameType.Cooperative && score === 4) {
+  if (gameState.gameType === GameType.Cooperative && score === 4)
+  {
     score = 3;
     bonusCoopTurn = true;
   }
@@ -52,14 +56,14 @@ export function ViewScore() {
         <div>
           {t("viewscore.score")}: {score} {t("viewscore.points")}!
         </div>
-        {gameState.gameType === GameType.Teams && (
-          <div>
+        {/* {gameState.gameType === GameType.Teams && (
+          <div style={{ margin: 8, textAlign: 'center' }}>
             {TeamName(TeamReverse(clueGiver.team))} {t("viewscore.got")}
             {wasCounterGuessCorrect
               ? t("viewscore.1_point_correct_guess")
               : t("viewscore.0_point_wrong_guess")}
           </div>
-        )}
+        )} */}
         {bonusCoopTurn && <div>{t("viewscore.bonus_turn")}</div>}
         <NextTurnOrEndGame />
       </CenteredColumn>
@@ -67,20 +71,23 @@ export function ViewScore() {
   );
 }
 
-function NextTurnOrEndGame() {
+function NextTurnOrEndGame()
+{
   const { t } = useTranslation();
   const { gameState, localPlayer, clueGiver, setGameState } = useContext(
     GameModelContext
   );
 
-  if (!clueGiver) {
+  if (!clueGiver)
+  {
     return null;
   }
 
   const resetButton = (
     <Button
       text='{t("viewscore.reset_game")}'
-      onClick={() => {
+      onClick={() =>
+      {
         setGameState({
           ...InitialGameState(),
           deckSeed: gameState.deckSeed,
@@ -90,7 +97,8 @@ function NextTurnOrEndGame() {
     />
   );
 
-  if (gameState.leftScore >= 10 && gameState.leftScore > gameState.rightScore) {
+  if (gameState.leftScore >= 10 && gameState.leftScore > gameState.rightScore)
+  {
     return (
       <>
         <div>
@@ -104,7 +112,8 @@ function NextTurnOrEndGame() {
   if (
     gameState.rightScore >= 10 &&
     gameState.rightScore > gameState.leftScore
-  ) {
+  )
+  {
     return (
       <>
         <div>
@@ -118,7 +127,8 @@ function NextTurnOrEndGame() {
   if (
     gameState.gameType === GameType.Cooperative &&
     gameState.turnsTaken >= 7 + gameState.coopBonusTurns
-  ) {
+  )
+  {
     return (
       <>
         <div>{t("viewscore.game_finished")}</div>
@@ -139,23 +149,28 @@ function NextTurnOrEndGame() {
 
   let bonusTurn = false;
 
-  const nextTeam = (() => {
-    if (gameState.gameType !== GameType.Teams) {
+  const nextTeam = (() =>
+  {
+    if (gameState.gameType !== GameType.Teams)
+    {
       return Team.Unset;
     }
 
-    if (score === 4) {
+    if (score === 4)
+    {
       if (
         gameState.leftScore < gameState.rightScore &&
         clueGiver.team === Team.Left
-      ) {
+      )
+      {
         bonusTurn = true;
         return Team.Left;
       }
       if (
         gameState.rightScore < gameState.leftScore &&
         clueGiver.team === Team.Right
-      ) {
+      )
+      {
         bonusTurn = true;
         return Team.Right;
       }
@@ -164,12 +179,15 @@ function NextTurnOrEndGame() {
     return TeamReverse(clueGiver.team);
   })();
 
-  const eligibleToDraw = (() => {
-    if (clueGiver.id === localPlayer.id) {
+  const eligibleToDraw = (() =>
+  {
+    if (clueGiver.id === localPlayer.id)
+    {
       return false;
     }
 
-    if (gameState.gameType !== GameType.Teams) {
+    if (gameState.gameType !== GameType.Teams)
+    {
       return true;
     }
 

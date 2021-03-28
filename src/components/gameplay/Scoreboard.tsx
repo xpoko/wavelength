@@ -19,7 +19,7 @@ export function Scoreboard()
     borderTop: "1px solid black",
     margin: 8,
     paddingTop: 16,
-    alignItems: "center",
+    alignItems: "start",
     // justifyContent: "space-between"
   };
 
