@@ -2,7 +2,6 @@ import React from "react";
 import { CenteredColumn, CenteredRow } from "./LayoutElements";
 import { GetContrastingColors } from "./GetContrastingColors";
 
-import { useTranslation } from "react-i18next";
 import Wheel from "./Wheel";
 
 export function Spectrum(props: {

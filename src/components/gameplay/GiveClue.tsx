@@ -7,7 +7,6 @@ import { Button } from "../common/Button";
 import { GameModelContext } from "../../state/GameModelContext";
 import { RandomSpectrumTarget } from "../../state/RandomSpectrumTarget";
 import { Info } from "../common/Info";
-import { Animate } from "../common/Animate";
 import { useTranslation } from "react-i18next";
 
 export function GiveClue()
@@ -76,12 +75,10 @@ export function GiveClue()
           <Button text={t("giveclue.draw_other_hand")} onClick={redrawCard} />
         </CenteredColumn>
       )}
-      {/* <Animate animation="wipe-reveal-right"> */}
       <Spectrum
         targetValue={gameState.spectrumTarget}
         spectrumCard={spectrumCard}
       />
-      {/* </Animate> */}
       <CenteredColumn>
         <CenteredRow>
           <input
