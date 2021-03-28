@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { useStorageBackedState } from "../hooks/useStorageBackedState";
 import { useNetworkBackedGameState } from "../hooks/useNetworkBackedGameState";
 import { InputName } from "./InputName";
@@ -10,13 +10,16 @@ import { BuildGameModel } from "../../state/BuildGameModel";
 import { RoomIdHeader } from "../common/RoomIdHeader";
 import { FakeRooms } from "./FakeRooms";
 
-export function GameRoom() {
+export function GameRoom()
+{
   const { roomId } = useParams<{ roomId: string }>();
-  if (roomId === undefined) {
+  if (roomId === undefined)
+  {
     throw new Error("RoomId missing");
   }
 
   const [playerName, setPlayerName] = useStorageBackedState("", "name");
+  const [NameConfirmed, setNameConfirmed] = useState(false)
 
   const [playerId] = useStorageBackedState(
     RandomFourCharacterString(),
@@ -29,16 +32,26 @@ export function GameRoom() {
     playerName
   );
 
-  if (roomId === "MULTIPLAYER_TEST") {
+  if (roomId === "MULTIPLAYER_TEST")
+  {
     return <FakeRooms />;
   }
 
   const gameModel = BuildGameModel(gameState, setGameState, playerId);
 
-  if (playerName.length === 0) {
+
+  if (playerName.length === 0 || !NameConfirmed)
+  {
     return (
       <InputName
-        setName={(name) => {
+        initialName={playerName || ""}
+        setName={(name) =>
+        {
+          name = name.trim()
+
+          if (name.length === 0) return
+
+          setNameConfirmed(true);
           setPlayerName(name);
           gameState.players[playerId].name = name;
           setGameState(gameState);
@@ -48,14 +61,17 @@ export function GameRoom() {
   }
 
   const searchParams = new URLSearchParams(window.location.search);
-  if (searchParams.get("rocketcrab")) {
+  if (searchParams.get("rocketcrab"))
+  {
     const rocketcrabPlayerName = searchParams.get("name");
-    if (rocketcrabPlayerName !== null && rocketcrabPlayerName !== playerName) {
+    if (rocketcrabPlayerName !== null && rocketcrabPlayerName !== playerName)
+    {
       setPlayerName(rocketcrabPlayerName);
     }
   }
 
-  if (!gameState?.players?.[playerId]) {
+  if (!gameState?.players?.[playerId])
+  {
     return null;
   }
 
