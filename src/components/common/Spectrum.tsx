@@ -13,7 +13,7 @@ export function Spectrum(props: {
   onChange?: (newValue: number) => void;
 })
 {
-  const onChangeDebounced =
+  const onChange =
     typeof props.onChange === 'function'
       ? throttle(props.onChange, 100, { 'leading': true })
       : props.onChange;
@@ -21,6 +21,10 @@ export function Spectrum(props: {
   const [primary, secondary] = GetContrastingColors(
     getStringHash(props.spectrumCard[0])
   );
+
+  const handValue = props.handleValue !== undefined
+    ? props.handleValue
+    : props.guessingValue
 
   return (
     <div>
@@ -35,9 +39,9 @@ export function Spectrum(props: {
         </CenteredRow>
         <Wheel
           target={props.targetValue}
-          hand={props.handleValue || props.guessingValue}
+          hand={handValue}
           settled={props.settled || false}
-          onChange={onChangeDebounced}
+          onChange={onChange}
         />
       </CenteredColumn>
     </div>
