@@ -87,3 +87,8 @@
   pointer-events: none;
   user-select   : none;
 }
+
+.player-row {
+  display  : "flex";
+  flex-flow: "row";
+}

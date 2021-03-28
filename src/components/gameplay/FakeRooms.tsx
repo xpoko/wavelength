@@ -3,15 +3,17 @@ import { GameModelContext } from "../../state/GameModelContext";
 import { ActiveGame } from "./ActiveGame";
 import { BuildGameModel } from "../../state/BuildGameModel";
 import { CenteredRow, CenteredColumn } from "../common/LayoutElements";
-import {
-  InitialGameState,
-  GameState,
-  Team,
-  GameType,
-  RoundPhase,
-} from "../../state/GameState";
+import
+  {
+    InitialGameState,
+    GameState,
+    Team,
+    GameType,
+    RoundPhase,
+  } from "../../state/GameState";
 
-export function FakeRooms() {
+export function FakeRooms()
+{
   const [gameState, setGameState] = useState<GameState>({
     ...InitialGameState(),
     gameType: GameType.Teams,
@@ -43,7 +45,7 @@ export function FakeRooms() {
     });
 
   const style: React.CSSProperties = {
-    width: 500,
+    width: 375,
     margin: 4,
     padding: 4,
     border: "1px solid black",

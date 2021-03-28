@@ -2,7 +2,8 @@ import { RandomSpectrumTarget } from "./RandomSpectrumTarget";
 import { RandomFourCharacterString } from "./RandomFourCharacterString";
 import { useTranslation } from "react-i18next";
 
-export enum RoundPhase {
+export enum RoundPhase
+{
   SetupGame,
   PickTeams,
   GiveClue,
@@ -11,35 +12,43 @@ export enum RoundPhase {
   ViewScore,
 }
 
-export enum GameType {
+export enum GameType
+{
   Teams,
   Cooperative,
   Freeplay,
 }
 
-export enum Team {
+export enum Team
+{
   Unset,
   Left,
   Right,
 }
 
-export function TeamReverse(team: Team) {
-  if (team === Team.Left) {
+export function TeamReverse(team: Team)
+{
+  if (team === Team.Left)
+  {
     return Team.Right;
   }
-  if (team === Team.Right) {
+  if (team === Team.Right)
+  {
     return Team.Left;
   }
   return Team.Unset;
 }
 
-export function TeamName(team: Team) {
+export function TeamName(team: Team)
+{
   const { t } = useTranslation();
 
-  if (team === Team.Left) {
+  if (team === Team.Left)
+  {
     return t("gamestate.left_brain");
   }
-  if (team === Team.Right) {
+  if (team === Team.Right)
+  {
     return t("gamestate.right_brain");
   }
   return t("gamestate.the_player");
@@ -60,7 +69,8 @@ export type TurnSummaryModel = {
   guess: number;
 };
 
-export interface GameState {
+export interface GameState
+{
   gameType: GameType;
   roundPhase: RoundPhase;
   turnsTaken: number;
@@ -79,7 +89,8 @@ export interface GameState {
   previousTurn: TurnSummaryModel | null;
 }
 
-export function InitialGameState(): GameState {
+export function InitialGameState(): GameState
+{
   return {
     gameType: GameType.Teams,
     roundPhase: RoundPhase.SetupGame,

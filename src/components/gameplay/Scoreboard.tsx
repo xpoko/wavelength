@@ -17,9 +17,10 @@ export function Scoreboard()
 
   const style = {
     borderTop: "1px solid black",
-    margin: 16,
+    margin: 8,
     paddingTop: 16,
     alignItems: "center",
+    // justifyContent: "space-between"
   };
 
   if (gameState.gameType === GameType.Freeplay)
@@ -72,11 +73,12 @@ function TeamColumn(props: { team: Team; score: number })
     (playerId) => gameState.players[playerId].team === props.team
   );
 
+  const teamName = TeamName(props.team)
+
   return (
     <CenteredColumn style={{ alignItems: "flex-start" }}>
       <div>
-        {TeamName(props.team)}: <AnimatableScore score={props.score} />{" "}
-        {t("scoreboard.points")}
+        {"Score"}: <AnimatableScore score={props.score} />{" "}
       </div>
       {members.map(toPlayerRow)}
     </CenteredColumn>
@@ -104,8 +106,8 @@ function AnimatableScore(props: { score: number })
         animation="fade-disappear-up"
         style={{
           position: "absolute",
-          fontSize: "xxx-large",
-          fontStyle: 'bold',
+          fontSize: "xx-large",
+          fontWeight: 'bold',
           color: "#15ff00",
           top: -16,
           right: 0,
@@ -135,7 +137,7 @@ function PlayerRow(props: { playerId: string })
 
   return (
     <div
-      style={{ marginLeft: 16, display: "flex", flexFlow: "row" }}
+      className="player-row"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
