@@ -6,10 +6,10 @@ import { CenteredColumn } from "./common/LayoutElements";
 import { LandingPage } from "./common/LandingPage";
 
 const style: React.CSSProperties = {
+  width: '100%',
   maxWidth: 500,
   margin: 4,
   padding: 4,
-  // border: "1px solid black",
 };
 
 function App()

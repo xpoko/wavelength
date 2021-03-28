@@ -1,8 +1,8 @@
 import React from "react";
 import { CenteredColumn, CenteredRow } from "./LayoutElements";
 import { GetContrastingColors } from "./GetContrastingColors";
-
 import Wheel from "./Wheel";
+const throttle = require('lodash.throttle');
 
 export function Spectrum(props: {
   spectrumCard: [string, string];
@@ -13,6 +13,11 @@ export function Spectrum(props: {
   onChange?: (newValue: number) => void;
 })
 {
+  const onChangeDebounced =
+    typeof props.onChange === 'function'
+      ? throttle(props.onChange, 100, { 'leading': true })
+      : props.onChange;
+
   const [primary, secondary] = GetContrastingColors(
     getStringHash(props.spectrumCard[0])
   );
@@ -32,7 +37,7 @@ export function Spectrum(props: {
           target={props.targetValue}
           hand={props.handleValue || props.guessingValue}
           settled={props.settled || false}
-          onChange={props.onChange}
+          onChange={onChangeDebounced}
         />
       </CenteredColumn>
     </div>

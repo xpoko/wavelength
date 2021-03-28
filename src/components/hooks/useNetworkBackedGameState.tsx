@@ -7,25 +7,30 @@ export function useNetworkBackedGameState(
   roomId: string,
   playerId: string,
   playerName: string
-): [GameState, (newState: Partial<GameState>) => void] {
+): [GameState, (newState: Partial<GameState>) => void]
+{
   const [gameState, setGameState] = useState<GameState>(InitialGameState());
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     const dbRef = firebase.database().ref("rooms/" + roomId);
 
-    dbRef.on("value", (appState) => {
+    dbRef.on("value", (appState) =>
+    {
       const networkGameState: GameState = appState.val();
       const completeGameState = {
         ...InitialGameState(),
         ...networkGameState,
       };
 
-      if (networkGameState?.roundPhase === undefined) {
+      if (networkGameState?.roundPhase === undefined)
+      {
         dbRef.set(completeGameState);
         return;
       }
 
-      if (completeGameState.players[playerId] === undefined) {
+      if (completeGameState.players[playerId] === undefined)
+      {
         completeGameState.players[playerId] = {
           name: playerName,
           team: Team.Unset,
@@ -43,7 +48,8 @@ export function useNetworkBackedGameState(
 
   return [
     gameState,
-    (newState: Partial<GameState>) => {
+    (newState: Partial<GameState>) =>
+    {
       dbRef.set({
         ...gameState,
         ...newState,
