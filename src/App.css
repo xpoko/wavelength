@@ -64,11 +64,11 @@
 }
 
 .fade-disappear-up {
-  transition: all 3s ease-in;
+  transition: all 1.5s ease-in;
 }
 
 .fade-disappear-up.animate {
-  transform: translateY(-100%);
+  transform: translateY(-100%) scale(1.5);
   opacity  : 0;
 }
 

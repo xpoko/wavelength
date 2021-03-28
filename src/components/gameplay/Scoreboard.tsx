@@ -10,7 +10,8 @@ import { useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 
-export function Scoreboard() {
+export function Scoreboard()
+{
   const { t } = useTranslation();
   const { gameState } = useContext(GameModelContext);
 
@@ -21,7 +22,8 @@ export function Scoreboard() {
     alignItems: "center",
   };
 
-  if (gameState.gameType === GameType.Freeplay) {
+  if (gameState.gameType === GameType.Freeplay)
+  {
     return (
       <CenteredColumn style={style}>
         <em>{t("scoreboard.free_play")}</em>
@@ -32,7 +34,8 @@ export function Scoreboard() {
     );
   }
 
-  if (gameState.gameType === GameType.Cooperative) {
+  if (gameState.gameType === GameType.Cooperative)
+  {
     const cardsRemaining = 7 + gameState.coopBonusTurns - gameState.turnsTaken;
     return (
       <CenteredColumn style={style}>
@@ -60,7 +63,8 @@ export function Scoreboard() {
   );
 }
 
-function TeamColumn(props: { team: Team; score: number }) {
+function TeamColumn(props: { team: Team; score: number })
+{
   const { t } = useTranslation();
   const { gameState } = useContext(GameModelContext);
 
@@ -79,14 +83,17 @@ function TeamColumn(props: { team: Team; score: number }) {
   );
 }
 
-function AnimatableScore(props: { score: number }) {
+function AnimatableScore(props: { score: number })
+{
   const lastScore = useRef(props.score);
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     lastScore.current = props.score;
   }, [props.score]);
 
-  if (props.score - lastScore.current === 0) {
+  if (props.score - lastScore.current === 0)
+  {
     return <span>{props.score}</span>;
   }
 
@@ -97,7 +104,9 @@ function AnimatableScore(props: { score: number }) {
         animation="fade-disappear-up"
         style={{
           position: "absolute",
-          fontSize: "small",
+          fontSize: "xxx-large",
+          fontStyle: 'bold',
+          color: "#15ff00",
           top: -16,
           right: 0,
         }}
@@ -108,11 +117,13 @@ function AnimatableScore(props: { score: number }) {
   );
 }
 
-function toPlayerRow(playerId: string) {
+function toPlayerRow(playerId: string)
+{
   return <PlayerRow key={playerId} playerId={playerId} />;
 }
 
-function PlayerRow(props: { playerId: string }) {
+function PlayerRow(props: { playerId: string })
+{
   const { gameState, setGameState } = useContext(GameModelContext);
   const player = gameState.players[props.playerId];
   const [hovered, setHovered] = useState(false);
@@ -135,7 +146,8 @@ function PlayerRow(props: { playerId: string }) {
             ...iconContainerStyle,
             cursor: "pointer",
           }}
-          onClick={() => {
+          onClick={() =>
+          {
             delete gameState.players[props.playerId];
             setGameState(gameState);
           }}
